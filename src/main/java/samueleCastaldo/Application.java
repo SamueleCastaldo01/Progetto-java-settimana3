@@ -61,22 +61,28 @@ public class Application {
             System.out.println(elemento);
         }
 
+        //aggiunta di utenti e prestito, per fare i vari test
         Utente utente1 = new Utente("Mario", "Rossi", LocalDate.of(1990, 5, 20));
         Utente utente2 = new Utente("Luigi", "Verdi", LocalDate.of(1985, 3, 15));
 
+        /*
         ad.aggiuntaUtente(utente1);
-        ad.aggiuntaUtente(utente2);
+        ad.aggiuntaUtente(utente2); */
 
         Prestito prestito1 = new Prestito(utente1, rivista1, LocalDate.now(), null);
         Prestito prestito2 = new Prestito(utente2, libro2, LocalDate.now(), null);
         Prestito prestito3 = new Prestito(utente2, rivista2, LocalDate.now(), null);
 
+        /*
         ad.aggiuntaPrestito(prestito1);
         ad.aggiuntaPrestito(prestito2);
-        ad.aggiuntaPrestito(prestito3);
+        ad.aggiuntaPrestito(prestito3); */
 
         //test ricerca elementi attualmente in prestito e dato un numero di tessera, quindi tramite utente
-        List<Elemento> resultElementoPrestitoNumeroTessera = ad.getElementoPrestitoByNumeroTessera(1);
+        List<Elemento> resultElementoPrestitoNumeroTessera = ad.getElementoPrestitoByNumeroTessera(52);
+        for (Elemento elemento : resultElementoPrestitoNumeroTessera) {
+            System.out.println(elemento);
+        }
 
         System.out.println("Hello World!");
 
