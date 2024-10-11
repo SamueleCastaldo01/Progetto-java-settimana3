@@ -31,7 +31,7 @@ public class Application {
         ad.aggiuntaElemento(libro1);
         ad.aggiuntaElemento(libro2);
         ad.aggiuntaElemento(rivista1);
-        ad.aggiuntaElemento(rivista2);  */
+        ad.aggiuntaElemento(rivista2); */
 
 
 
@@ -76,7 +76,7 @@ public class Application {
         /*
         ad.aggiuntaPrestito(prestito1);
         ad.aggiuntaPrestito(prestito2);
-        ad.aggiuntaPrestito(prestito3); */
+        ad.aggiuntaPrestito(prestito4); */
 
         //test ricerca elementi attualmente in prestito e dato un numero di tessera, quindi tramite utente
         List<Elemento> resultElementoPrestitoNumeroTessera = ad.getElementoPrestitoByNumeroTessera(52);
@@ -84,7 +84,11 @@ public class Application {
             System.out.println(elemento);
         }
 
-        System.out.println("Hello World!");
+        //Ultimo test tutti i prestiti scaduti, e non restituiti, ok funziona
+        List<Prestito> resultPrestitoScadutiNonRestituiti = ad.getPrestitoScadutiNonRestituiti();
+        for (Prestito prestito : resultPrestitoScadutiNonRestituiti) {
+            System.out.println(prestito);
+        }
 
         em.close();
         emf.close();

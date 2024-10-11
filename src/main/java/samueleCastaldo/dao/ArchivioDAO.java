@@ -9,6 +9,7 @@ import samueleCastaldo.entities.Prestito;
 import samueleCastaldo.entities.Utente;
 
 import javax.swing.text.html.parser.Entity;
+import java.time.LocalDate;
 import java.util.List;
 
 public class ArchivioDAO {
@@ -91,5 +92,17 @@ public class ArchivioDAO {
         query.setParameter("numeroTessera", numeroTessera);
         return query.getResultList();
     }
+
+    //in questo caso data effettiva deve essere null e bisogna confrontare la data odierna con quella della scadenza
+    public List<Prestito> getPrestitoScadutiNonRestituiti() {
+        LocalDate oggi = LocalDate.now();
+        TypedQuery<Prestito> query = entityManager.createQuery(
+                "SELECT p FROM Prestito p WHERE p.data_restituzione_effettiva IS NULL AND p.data_restituzione_prevista < :oggi", Prestito.class);
+        query.setParameter("oggi", oggi);
+        return query.getResultList();
+
+    }
+
+
 
 }
