@@ -32,6 +32,11 @@ public class Application {
 
          */
 
+        //Test 2. funziona, ha eliminato correttamente l'elemento dal db
+        //ad.rimozioneElementoByISBN(1);
+
+
+
         System.out.println("Hello World!");
 
         em.close();
