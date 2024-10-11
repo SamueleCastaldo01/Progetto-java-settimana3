@@ -9,6 +9,8 @@ public class Application {
     public static void main(String[] args) {
         EntityManager em = emf.createEntityManager();
 
+        //buona parte dei commenti, stanno anche nei commit, sulla logica che ho utilizzato
+
         System.out.println("Hello World!");
     }
 }
