@@ -5,6 +5,8 @@ import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.TypedQuery;
 import samueleCastaldo.entities.Elemento;
 import samueleCastaldo.entities.Libro;
+import samueleCastaldo.entities.Prestito;
+import samueleCastaldo.entities.Utente;
 
 import javax.swing.text.html.parser.Entity;
 import java.util.List;
@@ -22,6 +24,22 @@ public class ArchivioDAO {
         entityManager.persist(newElemento);
         transaction.commit();
         System.out.println("Elemento aggiunto con successo: " +newElemento.getTitolo());
+    }
+
+    public void aggiuntaUtente(Utente newUtente) {
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
+        entityManager.persist(newUtente);
+        transaction.commit();
+        System.out.println("Elemento aggiunto con successo: " +newUtente.getNome());
+    }
+
+    public void aggiuntaPrestito(Prestito newPrestito) {
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
+        entityManager.persist(newPrestito);
+        transaction.commit();
+        System.out.println("Elemento aggiunto con successo: " +newPrestito.getId());
     }
 
     //lo ho messa privata perchè non è richiesta nella traccia
@@ -61,6 +79,16 @@ public class ArchivioDAO {
     public List<Elemento> getELementoByTitolo(String titolo) {
         TypedQuery<Elemento> query = entityManager.createQuery("SELECT e FROM Elemento e WHERE LOWER(e.titolo) LIKE LOWER(:titolo)", Elemento.class);
         query.setParameter("titolo", "%" + titolo + "%");
+        return query.getResultList();
+    }
+
+    //la condizione è che la restituzione effettiva deve essere null e allo stesso tempo il numero di tessera deve corrispondere
+    public List<Elemento> getElementoPrestitoByNumeroTessera(long numeroTessera) {
+        TypedQuery<Elemento> query = entityManager.createQuery(
+                "SELECT p.elementoPrestato FROM Prestito p WHERE p.data_restituzione_effettiva IS NULL AND p.utente.numero_tessera = :numeroTessera",
+                Elemento.class
+        );
+        query.setParameter("numeroTessera", numeroTessera);
         return query.getResultList();
     }
 
