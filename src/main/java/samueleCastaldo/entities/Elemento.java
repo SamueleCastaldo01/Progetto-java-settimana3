@@ -18,7 +18,6 @@ public abstract class Elemento {
 
     //id lo posso anche non metterlo tanto lo mette da solo (generatedValue)
     public Elemento(String titolo, int anno_pubblicazione, int numero_pagine) {
-        this.isbn = isbn;
         this.titolo = titolo;
         this.anno_pubblicazione = anno_pubblicazione;
         this.numero_pagine = numero_pagine;
