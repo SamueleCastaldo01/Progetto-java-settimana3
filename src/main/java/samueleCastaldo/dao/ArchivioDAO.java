@@ -47,7 +47,7 @@ public class ArchivioDAO {
     //ma io la vado ad utilizzare per la funzione di sotto
     public Elemento getByISBN(long ISBN) {
         Elemento found = entityManager.find(Elemento.class, ISBN);
-        if(found == null) throw new IllegalArgumentException("NOn è stato travato");
+        if(found == null) throw new IllegalArgumentException("NOn è stato travato l'elemento");
         return found;
     }
 
@@ -65,14 +65,18 @@ public class ArchivioDAO {
         //qui in questo caso ci conviene usare JPQL
         TypedQuery<Elemento> query = entityManager.createQuery("SELECT e FROM Elemento e WHERE e.anno_pubblicazione = :anno_p", Elemento.class);
         query.setParameter("anno_p", annoDiPubblicazione);
-        return query.getResultList();
+        List<Elemento> risultati = query.getResultList();
+        if(risultati.isEmpty()) throw new IllegalArgumentException("Nessun Elemento trovato");
+        return risultati;
     }
 
     //anche in questo caso sarà una lista, perché ci possso essere più libri di un solo autore
     public List<Libro> getLibroByAutore(String autore) {
         TypedQuery<Libro> query = entityManager.createQuery("SELECT l FROM Libro l WHERE l.autore = :autore", Libro.class);
         query.setParameter("autore", autore);
-        return  query.getResultList();
+        List<Libro> risultati = query.getResultList();
+        if(risultati.isEmpty()) throw new IllegalArgumentException("Nessun Libro trovato");
+        return risultati;
     }
 
     //qui in qesto caso devo utilizzare l'operatore like, ho fatto che diventa tutto minuscolo il titolo, cosi togliamo il case sensitive
@@ -80,7 +84,9 @@ public class ArchivioDAO {
     public List<Elemento> getELementoByTitolo(String titolo) {
         TypedQuery<Elemento> query = entityManager.createQuery("SELECT e FROM Elemento e WHERE LOWER(e.titolo) LIKE LOWER(:titolo)", Elemento.class);
         query.setParameter("titolo", "%" + titolo + "%");
-        return query.getResultList();
+        List<Elemento> risultati = query.getResultList();
+        if(risultati.isEmpty()) throw new IllegalArgumentException("Nessun Elemento trovato");
+        return risultati;
     }
 
     //la condizione è che la restituzione effettiva deve essere null e allo stesso tempo il numero di tessera deve corrispondere
@@ -90,7 +96,9 @@ public class ArchivioDAO {
                 Elemento.class
         );
         query.setParameter("numeroTessera", numeroTessera);
-        return query.getResultList();
+        List<Elemento> risultati = query.getResultList();
+        if(risultati.isEmpty()) throw new IllegalArgumentException("Nessun Elemento trovato");
+        return risultati;
     }
 
     //in questo caso data effettiva deve essere null e bisogna confrontare la data odierna con quella della scadenza
@@ -99,7 +107,9 @@ public class ArchivioDAO {
         TypedQuery<Prestito> query = entityManager.createQuery(
                 "SELECT p FROM Prestito p WHERE p.data_restituzione_effettiva IS NULL AND p.data_restituzione_prevista < :oggi", Prestito.class);
         query.setParameter("oggi", oggi);
-        return query.getResultList();
+        List<Prestito> risultati = query.getResultList();
+        if(risultati.isEmpty()) throw new IllegalArgumentException("Nessun Prestito trovato");
+        return risultati;
 
     }
 
