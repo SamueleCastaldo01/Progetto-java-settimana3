@@ -4,6 +4,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.TypedQuery;
 import samueleCastaldo.entities.Elemento;
+import samueleCastaldo.entities.Libro;
 
 import javax.swing.text.html.parser.Entity;
 import java.util.List;
@@ -46,6 +47,13 @@ public class ArchivioDAO {
         TypedQuery<Elemento> query = entityManager.createQuery("SELECT e FROM Elemento e WHERE e.anno_pubblicazione = :anno_p", Elemento.class);
         query.setParameter("anno_p", annoDiPubblicazione);
         return query.getResultList();
+    }
+
+    //anche in questo caso sarà una lista, perché ci possso essere più libri di un solo autore
+    public List<Libro> getLibroByAutore(String autore) {
+        TypedQuery<Libro> query = entityManager.createQuery("SELECT l FROM Libro l WHERE l.autore = :autore", Libro.class);
+        query.setParameter("autore", autore);
+        return  query.getResultList();
     }
 
 }

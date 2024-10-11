@@ -48,6 +48,15 @@ public class Application {
             System.out.println(elemento);
         }
 
+
+        //test ricerca per autore, perfetto funziona correttamente
+        List<Libro> resultLibroAutore = ad.getLibroByAutore("J.K. Rowling");
+        for (Libro libro : resultLibroAutore) {
+            System.out.println(libro);
+        }
+
+
+
         System.out.println("Hello World!");
 
         em.close();
