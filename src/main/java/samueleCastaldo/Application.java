@@ -9,6 +9,8 @@ import samueleCastaldo.entities.Libro;
 import samueleCastaldo.entities.Periodicita;
 import samueleCastaldo.entities.Rivista;
 
+import java.util.List;
+
 public class Application {
     private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("progetto_settimana3");
     public static void main(String[] args) {
@@ -40,7 +42,11 @@ public class Application {
         Elemento resultSearch = ad.getByISBN(2);
         System.out.println(resultSearch);
 
-
+        //test ricerca per anno di pubblicazione, perfetto funziona correttamente :)
+        List<Elemento> resultAnnoPubblicazione = ad.getByAnnoDiPubblicazione(2023);
+        for (Elemento elemento : resultAnnoPubblicazione) {
+            System.out.println(elemento);
+        }
 
         System.out.println("Hello World!");
 

@@ -2,9 +2,11 @@ package samueleCastaldo.dao;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.TypedQuery;
 import samueleCastaldo.entities.Elemento;
 
 import javax.swing.text.html.parser.Entity;
+import java.util.List;
 
 public class ArchivioDAO {
     private final EntityManager entityManager;
@@ -36,6 +38,14 @@ public class ArchivioDAO {
         entityManager.remove(found);
         transaction.commit();
         System.out.println("Elemento eliminato correttamente: " +found.getTitolo());
+    }
+
+    //in questo caso sarà una lista, perché più libri posso essere stati fatti nello stesso anno
+    public List<Elemento> getByAnnoDiPubblicazione(int annoDiPubblicazione) {
+        //qui in questo caso ci conviene usare JPQL
+        TypedQuery<Elemento> query = entityManager.createQuery("SELECT e FROM Elemento e WHERE e.anno_pubblicazione = :anno_p", Elemento.class);
+        query.setParameter("anno_p", annoDiPubblicazione);
+        return query.getResultList();
     }
 
 }
