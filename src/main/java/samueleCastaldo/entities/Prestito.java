@@ -10,10 +10,10 @@ public class Prestito {
     @Id
     @GeneratedValue
     private long id;
-    @ManyToOne
+    @ManyToOne  //un utente può fare più prestiti, ma un prestito può essere fatto solamente da un utente
     @JoinColumn(name = "utente_id", nullable = false)  //che poi sarebbe la tessera
     private Utente utente;
-    @ManyToOne
+    @ManyToOne   //un libro può essere prestato più volte, ma un prestito può avere solo un libro per volta
     @JoinColumn(name = "elemento_id", nullable = false)
     private Elemento elementoPrestato;
     private LocalDate data_inizio_prestito;
