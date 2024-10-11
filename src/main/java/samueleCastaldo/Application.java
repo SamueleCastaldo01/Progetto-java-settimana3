@@ -4,6 +4,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import samueleCastaldo.dao.ArchivioDAO;
+import samueleCastaldo.entities.Elemento;
 import samueleCastaldo.entities.Libro;
 import samueleCastaldo.entities.Periodicita;
 import samueleCastaldo.entities.Rivista;
@@ -34,6 +35,10 @@ public class Application {
 
         //Test 2. funziona, ha eliminato correttamente l'elemento dal db
         //ad.rimozioneElementoByISBN(1);
+
+        //test 3. Ricerca tramite ISBN, Funziona anche questo :)
+        Elemento resultSearch = ad.getByISBN(2);
+        System.out.println(resultSearch);
 
 
 

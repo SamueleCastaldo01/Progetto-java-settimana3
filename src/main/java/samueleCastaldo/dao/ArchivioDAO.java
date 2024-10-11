@@ -23,7 +23,7 @@ public class ArchivioDAO {
 
     //lo ho messa privata perchè non è richiesta nella traccia
     //ma io la vado ad utilizzare per la funzione di sotto
-    private Elemento getByISBN(long ISBN) {
+    public Elemento getByISBN(long ISBN) {
         Elemento found = entityManager.find(Elemento.class, ISBN);
         if(found == null) throw new IllegalArgumentException("NOn è stato travato");
         return found;
