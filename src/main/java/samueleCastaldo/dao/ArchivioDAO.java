@@ -56,4 +56,12 @@ public class ArchivioDAO {
         return  query.getResultList();
     }
 
+    //qui in qesto caso devo utilizzare l'operatore like, ho fatto che diventa tutto minuscolo il titolo, cosi togliamo il case sensitive
+    //e poi ho messo al set Parameter su titolo %, in questo modo il titolo non deve esser proprio uguale
+    public List<Elemento> getELementoByTitolo(String titolo) {
+        TypedQuery<Elemento> query = entityManager.createQuery("SELECT e FROM Elemento e WHERE LOWER(e.titolo) LIKE LOWER(:titolo)", Elemento.class);
+        query.setParameter("titolo", "%" + titolo + "%");
+        return query.getResultList();
+    }
+
 }

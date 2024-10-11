@@ -55,7 +55,11 @@ public class Application {
             System.out.println(libro);
         }
 
-
+        //test ricerca per titolo, con like. Funziona me lo prende anche se non ho inserito tutto il titolo
+        List<Elemento> resultElementoTitolo = ad.getELementoByTitolo("Harry Potter");
+        for (Elemento elemento : resultElementoTitolo) {
+            System.out.println(elemento);
+        }
 
         System.out.println("Hello World!");
 
